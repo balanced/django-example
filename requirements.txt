@@ -1,3 +1,4 @@
 django
 balanced
-django-balanced >= 0.1.8
+django-balanced >= 0.1.9
+
