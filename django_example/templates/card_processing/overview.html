@@ -2,6 +2,12 @@
 {% block content %}
 
 <h1>Balanced Card Processing</h1>
-        <h2>Overview</h2>
-        <p>Yo dawg, I'mma break it down like this for you. Here's how card processing happens</p>
+<p><a href="https://www.balancedpayments.com/docs/api?language=bash#cards">API</a> |
+   <a href="https://www.balancedpayments.com/docs/overview?language=bash#balanced-processing">Overview</a></p>
+<p>Cards are associated with accounts, and can be debited and refunded.</p>
+<p>Once you've tokenized and associated a card with an account you can create
+    debits which represent a transfer of funds from the card into your escrow
+    account.</p>
+<h3>Try it</h3>
+<p>View an <a href="{% url accounts.show account_id=balanced.Marketplace.my_marketplace.owner_account.id %}">account</a> and tokenize a card now.</p>
 {% endblock %}
