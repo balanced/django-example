@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Cards</h1>
+
+<form action="#" method="POST" id="credit-card-form">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Credit Card Details</legend>
+        <label>Card Number
+            <input type="text"
+                   autocomplete="off"
+                   placeholder="Card Number"
+                   class="cc-number" value="4111111111111111">
+        </label>
+        <label>Expiration
+            <input type="text"
+                   autocomplete="off"
+                   placeholder="Expiration Month"
+                   class="cc-em" value="01">
+            <span>/</span>
+            <input type="text"
+                   autocomplete="off"
+                   placeholder="Expiration Year"
+                   class="cc-ey" value="2020">
+        </label>
+        <label>Security Code (CSC)
+            <input type="text"
+                   autocomplete="off"
+                   placeholder="CSC"
+                   class="cc-csc" value="123">
+        </label>
+        <button type="submit" class="btn">
+            Tokenize
+        </button>
+    </fieldset>
+</form>
+
+
+{% endblock %}

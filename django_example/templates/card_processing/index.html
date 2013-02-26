@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Cards</h1>
+
+<a href="{% url card_processing.create account_id=account.id %}" class="btn">Create a new card</a>
+
+{% if account.cards %}
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name on card</th>
+        <th>Card number</th>
+        <th>Expiration</th>
+        <th>Brand</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for card in account.cards %}
+        <tr>
+            <td>{{ card.id }}</td>
+            <td>{{ card.name }}</td>
+            <td>{{ card.last_four }}</td>
+            <td>{{ card.expiration_month }}/{{ card.expiration_year }}</td>
+            <td>{{ card.brand }}</td>
+            <td>Invalidate</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% endblock %}

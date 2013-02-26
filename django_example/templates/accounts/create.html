@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Accounts</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Create a new account</legend>
+        <label>Email Address</label>
+        <input type="email" name="email_address" placeholder="bob@example.com">
+        <span class="help-block">Optional.</span>
+        <label>Name</label>
+        <input type="text" name="name" placeholder="Bob Saget">
+        <span class="help-block">Optional.</span>
+        <button type="submit" class="btn">Create</button>
+    </fieldset>
+</form>
+
+{% endblock %}

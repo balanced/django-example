@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        /* thanks to the bootstrap folks for saving us hundreds of hours */
+        @import url('http://twitter.github.com/bootstrap/assets/css/bootstrap.css');
+        @import url('http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css');
+        body {
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
+    </style>
+
+    <title>{% block title %}Balanced - Example Site{% endblock %}</title>
+</head>
+<body>
+<header class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar-inner">
+        <div class="container">
+            <ul class="nav">
+                <li><a href="{% url accounts.index %}">Accounts</a></li>
+                <li><a href="{% url card_processing.overview %}">Card Processing</a></li>
+                <li><a href="{% url ach.overview %}">Bank Account Credits</a></li>
+                <li><a href="{% url ach.overview %}#debits">Bank Account Debits</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+<script type="text/javascript">
+    // included here to initialise the balanced.js library
+    var marketplaceUri = '{{ BALANCED.MARKETPLACE_URI }}';
+</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<!--
+ balanced.js handles the secure tokenization of card or bank account data for
+ you. it also has lots of handy validation functions
+// -->
+<script type="text/javascript"
+        src="https://js.balancedpayments.com/v1/balanced.js"></script>
+<!--
+ These are some sample javascript files you can use for tokenizing bank
+ accounts and credit cards.
+// -->
+<script type="text/javascript"
+        src="/static/js/ach.js"></script>
+<script type="text/javascript"
+        src="/static/js/card_processing.js"></script>
+</body>
+</html>

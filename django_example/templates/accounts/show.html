@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Accounts</h1>
+<h2>{{ account.id }}</h2>
+
+<a href="{% url card_processing.create account_id=account.id %}">Add a new card</a>
+<a href="{% url ach.create account_id=account.id %}">Add a new bank account</a>
+
+    <h3>Debit this account</h3>
+    {% if account.cards.count %}
+    <form method="POST" action="{% url accounts.debit account_id=account.id %}">
+        {% csrf_token %}
+        <select name="source_uri">
+            {% for instrument in account.cards %}
+            <option value="{{ instrument.uri }}">**** **** **** {{ instrument.last_four }}</option>
+            {% endfor %}
+            {% for instrument in account.bank_accounts %}
+            {% if instrument.can_debit %}
+            <option value="{{ instrument.uri }}">{{ instrument.name }}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+        <div class="input-prepend">
+            <span class="add-on">$</span>
+            <input type="number" name="amount" placeholder="0.00" value="1.00">
+        </div>
+        <button class="btn">Create a Debit</button>
+    </form>
+    {% else %}
+    <p>No cards on file to debit, add one!</p>
+    {% endif %}
+
+    <h3>Credit this account</h3>
+    {% if account.bank_accounts.count %}
+    <form method="POST" action="{% url accounts.credit account_id=account.id %}">
+        {% csrf_token %}
+        <select name="source_uri">
+            {% for instrument in account.bank_accounts %}
+            <option value="{{ instrument.uri }}">{{ instrument.name }}</option>
+            {% endfor %}
+        </select>
+        <div class="input-prepend">
+            <span class="add-on">$</span>
+            <input type="number" name="amount" placeholder="0.00" value="1.00">
+        </div>
+        <button class="btn">Create a Credit</button>
+    </form>
+    {% else %}
+        <p>No bank accounts on file to credit, add one!</p>
+    {% endif %}
+
+    <h3>Transactions</h3>
+    {% if account.transactions.count %}
+    <table class="table">
+        <thead>
+
+        </thead>
+        <tbody>
+        {% for txn in account.transactions %}
+        <tr>
+            <td>{{ txn.id }}</td>
+            <td>{{ txn.amount }}</td>
+            <td>{{ txn.created_at }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No transactions, add a card and debit this account to create them</p>
+    {% endif %}
+
+    <h3>Underwrite as a merchant</h3>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Card</h1>
+<p><a href="{% url accounts.show account_id=account.id %}">Back to Account ({{ account.id }})</a></p>
+
+<table>
+    {% for key, value in card.expose %}
+    <tr>
+        <th>{{ key }}</th>
+        <td>{{ value }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

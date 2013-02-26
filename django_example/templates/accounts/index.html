@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Accounts</h1>
+
+<a href="{% url accounts.create %}" class="btn">Create a new account</a>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Email address</th>
+        <th>Name</th>
+        <th colspan="2"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for account in accounts %}
+    <tr>
+        <td><a href="{% url accounts.show account_id=account.id %}">{{ account.id }}</a></td>
+        <td>{{ account.email_address }}</td>
+        <td>{{ account.name }}</td>
+        <td><a href="{% url card_processing.index account_id=account.id %}">Cards</a></td>
+        <td><a href="#">Bank Accounts</a></td>
+
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

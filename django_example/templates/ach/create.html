@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+    <form method="POST" id="bank-account-form" class="form-horizontal">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Bank Account Information</legend>
+            <label>Account Holder's Name
+                <input type="text"
+                       autocomplete="off"
+                       placeholder="Bank Account Holder's name"
+                       class="ba-name"
+                       value="John Q. TaxPayer">
+            </label>
+            <label>Routing Number
+                <input type="text"
+                       autocomplete="off"
+                       placeholder="Routing Number"
+                       class="ba-rn"
+                       value="121000358">
+            </label>
+            <label>Account Number
+                <input type="text"
+                       autocomplete="off"
+                       placeholder="Account Number"
+                       class="ba-an"
+                       value="9900000001">
+            </label>
+            <label>Account Type
+                <select>
+                    <option value='' disabled selected style='display:none;'>
+                        Select Account Type
+                    </option>
+                    <option value="checking" default>CHECKING</option>
+                    <option value="savings">SAVINGS</option>
+                </select>
+            </label>
+            <button type="submit" class="btn">
+                Tokenize
+            </button>
+        </fieldset>
+    </form>
+        <small>Find a copy of this <a href="http://jsfiddle.net/mahmoudimus/DGDkt/11/">form online at jsFiddle</a>.</small>
+
+{% endblock %}
